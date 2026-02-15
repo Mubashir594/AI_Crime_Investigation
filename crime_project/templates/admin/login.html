@@ -1,0 +1,44 @@
+{% extends "admin/base_site.html" %}
+{% load i18n static %}
+
+{% block bodyclass %}login ciu-login-page{% endblock %}
+
+{% block nav-sidebar %}{% endblock %}
+
+{% block content %}
+<div class="ciu-login-wrap">
+    <div class="ciu-login-card">
+        <p class="ciu-eyebrow">Admin Login</p>
+        <h1>Crime Intelligence Admin</h1>
+        <p class="ciu-muted">
+            Authorized admin access only.
+        </p>
+
+        {% if form.errors and not form.non_field_errors %}
+            <p class="errornote">
+                {% translate "Please enter the correct username and password for a staff account." %}
+            </p>
+        {% endif %}
+
+        {% if form.non_field_errors %}
+            <div class="errornote">
+                {% for error in form.non_field_errors %}{{ error }}{% endfor %}
+            </div>
+        {% endif %}
+
+        <form action="{{ app_path }}" method="post" id="login-form">
+            {% csrf_token %}
+            <div class="ciu-field">
+                {{ form.username.label_tag }}
+                {{ form.username }}
+            </div>
+            <div class="ciu-field">
+                {{ form.password.label_tag }}
+                {{ form.password }}
+            </div>
+            <input type="hidden" name="next" value="{{ next }}">
+            <button type="submit" class="ciu-submit">{% translate 'Secure Sign In' %}</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

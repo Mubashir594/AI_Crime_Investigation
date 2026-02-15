@@ -1,0 +1,211 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Investigation Control Dashboard</title>
+
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Bootstrap Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{% static 'investigator/css/dashboard.css' %}">
+</head>
+
+<body>
+
+<div class="container-fluid">
+    <div class="row">
+
+        <!-- SIDEBAR -->
+        <nav class="col-md-2 sidebar p-3">
+            <h5 class="text-center mb-4 text-info">CRIME INTELLIGENCE UNIT</h5>
+
+            <p class="text-center text-light small">
+                Logged in as:<br>
+                <strong>{{ request.session.investigator_name }}</strong>
+            </p>
+
+            <ul class="nav flex-column mt-3">
+                <li class="nav-item mb-2">
+                    <a class="nav-link active" href="/investigator/dashboard/">
+                        <i class="bi bi-speedometer2"></i> Dashboard
+                    </a>
+                </li>
+
+                <li class="nav-item mb-2">
+                    <a class="nav-link" href="/investigator/live/">
+                        <i class="bi bi-camera-video"></i> Live Surveillance
+                    </a>
+                </li>
+
+                <li class="nav-item mb-2">
+                    <a class="nav-link" href="#">
+                        <i class="bi bi-person-bounding-box"></i> Face Recognition
+                    </a>
+                </li>
+
+                <li class="nav-item mb-2">
+                    <a class="nav-link" href="#">
+                        <i class="bi bi-people"></i> Suspect Profiles
+                    </a>
+                </li>
+
+                <li class="nav-item mb-2">
+                    <a class="nav-link" href="#">
+                        <i class="bi bi-folder2-open"></i> Case Records
+                    </a>
+                </li>
+
+                <li class="nav-item mb-2">
+                    <a class="nav-link" href="#">
+                        <i class="bi bi-bell"></i> Alerts & Logs
+                    </a>
+                </li>
+
+                <!-- ✅ PROPER LOGOUT -->
+                <li class="nav-item mt-4">
+                    <a class="nav-link text-danger" href="{% url 'investigator:logout' %}">
+
+                        <i class="bi bi-box-arrow-right"></i> Logout
+                    </a>
+                </li>
+            </ul>
+        </nav>
+
+        <!-- MAIN CONTENT -->
+        <main class="col-md-10 ms-sm-auto px-4">
+
+            <!-- HEADER -->
+            <div class="d-flex justify-content-between align-items-center pt-4 pb-3 border-bottom">
+                <h2 class="text-light">Investigation Control Dashboard</h2>
+                <span class="badge bg-warning text-dark">Authorized Access Only</span>
+            </div>
+
+            <!-- KPI CARDS -->
+            <div class="row mt-4">
+                <div class="col-md-3 mb-3">
+                    <div class="card kpi-card text-center">
+                        <h6>Total Cases</h6>
+                        <h2>128</h2>
+                        <span class="text-success">Stable</span>
+                    </div>
+                </div>
+
+                <div class="col-md-3 mb-3">
+                    <div class="card kpi-card text-center">
+                        <h6>Identified Suspects</h6>
+                        <h2>42</h2>
+                        <span class="text-warning">Under Review</span>
+                    </div>
+                </div>
+
+                <div class="col-md-3 mb-3">
+                    <div class="card kpi-card text-center">
+                        <h6>Active Investigations</h6>
+                        <h2>19</h2>
+                        <span class="text-danger">High Priority</span>
+                    </div>
+                </div>
+
+                <div class="col-md-3 mb-3">
+                    <div class="card kpi-card text-center">
+                        <h6>Live Cameras</h6>
+                        <h2>6</h2>
+                        <span class="text-success">Operational</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ACTION PANELS -->
+            <div class="row mt-4">
+                <div class="col-md-6 mb-3">
+                    <div class="card action-card p-4 text-center">
+                        <h5 class="mb-3">CCTV Evidence Analysis</h5>
+                        <p class="text-muted">
+                            Upload recorded CCTV footage for automated face detection and analysis.
+                        </p>
+                        <a href="/investigator/upload/" class="btn btn-primary w-100">
+                            <i class="bi bi-upload"></i> Upload Evidence
+                        </a>
+                    </div>
+                </div>
+
+                <div class="col-md-6 mb-3">
+                    <div class="card action-card p-4 text-center">
+                        <h5 class="mb-3">Live Surveillance Monitoring</h5>
+                        <p class="text-muted">
+                            Activate real-time camera feed to identify suspects using AI.
+                        </p>
+                        <a href="/investigator/live/" class="btn btn-success w-100">
+                            <i class="bi bi-camera-video"></i> Start Live Monitoring
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ANALYTICS -->
+            <div class="row mt-5">
+                <div class="col-md-12">
+                    <div class="card analytics-card p-4">
+                        <h5 class="mb-3">Face Detection Analytics</h5>
+                        <canvas id="detectionChart" height="100"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ALERTS & LOGS -->
+            <div class="row mt-4">
+                <div class="col-md-12">
+                    <div class="card logs-card p-4">
+                        <h5 class="mb-3">Alerts & Activity Logs</h5>
+
+                        <div class="table-responsive">
+                            <table class="table table-dark table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>Time</th>
+                                        <th>Source</th>
+                                        <th>Event</th>
+                                        <th>Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>10:42 AM</td>
+                                        <td>Camera 03</td>
+                                        <td>Face Detected</td>
+                                        <td><span class="badge bg-success">Logged</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>11:18 AM</td>
+                                        <td>Camera 01</td>
+                                        <td>Suspect Match</td>
+                                        <td><span class="badge bg-danger">Alert</span></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+        </main>
+    </div>
+</div>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+<!-- Custom JS -->
+<script src="{% static 'investigator/js/dashboard.js' %}"></script>
+
+</body>
+</html>

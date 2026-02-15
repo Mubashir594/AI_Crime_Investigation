@@ -1,0 +1,118 @@
+{% extends "admin/base_site.html" %}
+{% load i18n static %}
+
+{% block content %}
+<div class="ciu-dashboard-layout">
+    <aside class="ciu-icon-sidebar">
+        <a class="ciu-icon-link" href="/admin/investigator_module/investigator/add/" title="Add Investigator">🕵️</a>
+        <a class="ciu-icon-link" href="/admin/crime_database/criminal/add/" title="Add Criminal">👤</a>
+        <a class="ciu-icon-link" href="/admin/auth/user/add/" title="Add Access User">🔐</a>
+        <a class="ciu-icon-link" href="/admin/auth/group/" title="Manage Access Groups">🛡️</a>
+        <a class="ciu-icon-link" href="/admin/crime_database/crimerecord/add/" title="Add Crime Record">📄</a>
+        <a class="ciu-icon-link" href="/admin/crime_database/evidence/add/" title="Add Evidence">📎</a>
+        <a class="ciu-icon-link" href="/admin/crime_database/alertlog/" title="View Alerts">🚨</a>
+    </aside>
+
+    <div class="ciu-shell">
+        <section class="ciu-hero">
+            <div>
+                <p class="ciu-eyebrow">Admin Dashboard</p>
+                <h1>Welcome Administrator</h1>
+                <p class="ciu-muted">
+                    Manage investigators, criminals, access control, and evidence from one panel.
+                </p>
+            </div>
+            <div class="ciu-hero-actions">
+                <a class="ciu-btn" href="/api/dashboard/status/" target="_blank" rel="noopener noreferrer">System Status API</a>
+                <a class="ciu-btn ciu-btn-ghost" href="/admin/auth/user/">Manage Users</a>
+            </div>
+        </section>
+
+        <section class="ciu-kpis">
+            <article class="ciu-kpi">
+                <h3>Installed Modules</h3>
+                <p>{{ app_list|length }}</p>
+            </article>
+            <article class="ciu-kpi">
+                <h3>System Mode</h3>
+                <p>ACTIVE</p>
+            </article>
+            <article class="ciu-kpi">
+                <h3>Current Session</h3>
+                <p>{{ user.get_username|default:"admin" }}</p>
+            </article>
+            <article class="ciu-kpi">
+                <h3>Time Zone</h3>
+                <p>UTC</p>
+            </article>
+        </section>
+
+        <section class="ciu-grid">
+            <div class="ciu-card">
+                <div class="ciu-card-head">
+                    <h2>Application Modules</h2>
+                    <span class="ciu-pill">Live</span>
+                </div>
+                {% if app_list %}
+                    <div class="ciu-app-grid">
+                        {% for app in app_list %}
+                            <article class="ciu-app">
+                                <div class="ciu-app-top">
+                                    <h3>{{ app.name }}</h3>
+                                    <span>{{ app.models|length }} models</span>
+                                </div>
+                                <ul>
+                                    {% for model in app.models %}
+                                        <li>
+                                            {% if model.admin_url %}
+                                                <a href="{{ model.admin_url }}">{{ model.name }}</a>
+                                            {% else %}
+                                                <span>{{ model.name }}</span>
+                                            {% endif %}
+                                            {% if model.add_url %}
+                                                <a class="ciu-mini-action" href="{{ model.add_url }}">+ Add</a>
+                                            {% endif %}
+                                        </li>
+                                    {% endfor %}
+                                </ul>
+                            </article>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    <p class="ciu-muted">No applications available for this user.</p>
+                {% endif %}
+            </div>
+
+            <div class="ciu-card">
+                <div class="ciu-card-head">
+                    <h2>Recent Administrative Actions</h2>
+                    <span class="ciu-pill">Audit</span>
+                </div>
+                {% if log_entries %}
+                    <ul class="ciu-log-list">
+                        {% for entry in log_entries %}
+                            <li>
+                                <span class="ciu-log-object">{{ entry.object_repr }}</span>
+                                <span class="ciu-log-meta">
+                                    {{ entry.content_type }} |
+                                    {% if entry.is_addition %}
+                                        Added
+                                    {% elif entry.is_change %}
+                                        Updated
+                                    {% elif entry.is_deletion %}
+                                        Deleted
+                                    {% else %}
+                                        Action
+                                    {% endif %}
+                                </span>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                {% else %}
+                    <p class="ciu-muted">No recent activity recorded.</p>
+                {% endif %}
+            </div>
+        </section>
+    </div>
+</div>
+{% endblock %}

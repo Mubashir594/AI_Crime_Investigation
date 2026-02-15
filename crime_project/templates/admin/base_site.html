@@ -1,0 +1,26 @@
+{% extends "admin/base.html" %}
+{% load static %}
+
+{% block title %}CIU Admin Console{% endblock %}
+
+{% block branding %}
+<div class="ciu-branding">
+    <div class="ciu-brand-mark">CIU</div>
+    <div class="ciu-brand-copy">
+        <span class="ciu-brand-title">Crime Intelligence Unit</span>
+        <span class="ciu-brand-subtitle">Administrative Command Console</span>
+    </div>
+</div>
+{% endblock %}
+
+{% block nav-global %}{% endblock %}
+
+{% block extrastyle %}
+{{ block.super }}
+<link rel="stylesheet" href="{% static 'admin_module/admin.css' %}">
+{% endblock %}
+
+{% block extrahead %}
+{{ block.super }}
+<script defer src="{% static 'admin_module/admin.js' %}"></script>
+{% endblock %}

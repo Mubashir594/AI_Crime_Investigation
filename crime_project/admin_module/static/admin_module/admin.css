@@ -1,0 +1,422 @@
+:root {
+    --inv-bg: #0b1220;
+    --inv-card: #020617;
+    --inv-border: #1e293b;
+    --inv-text: #ffffff;
+    --inv-muted: #cbd5f5;
+    --inv-accent: #38bdf8;
+}
+
+body {
+    background-color: var(--inv-bg);
+    color: var(--inv-text);
+    font-family: Arial, sans-serif;
+}
+
+#header {
+    background: #020617;
+    border-bottom: 1px solid var(--inv-border);
+    color: var(--inv-text);
+}
+
+#header a,
+#user-tools,
+#user-tools a {
+    color: var(--inv-text) !important;
+}
+
+.ciu-branding {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.ciu-brand-mark {
+    width: 30px;
+    height: 30px;
+    border-radius: 6px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--inv-accent);
+    color: #001018;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.ciu-brand-title {
+    color: var(--inv-accent);
+    font-weight: 700;
+    font-size: 14px;
+}
+
+.ciu-brand-subtitle {
+    color: var(--inv-muted);
+    font-size: 11px;
+}
+
+#content,
+#content h1,
+#content h2,
+#content h3 {
+    color: var(--inv-text);
+}
+
+#content a {
+    color: var(--inv-accent);
+}
+
+div.breadcrumbs {
+    background: #020617;
+    border-bottom: 1px solid var(--inv-border);
+    color: var(--inv-muted);
+}
+
+div.breadcrumbs a {
+    color: var(--inv-accent);
+}
+
+#nav-sidebar {
+    display: none !important;
+}
+
+.module,
+.inline-group,
+.results,
+.submit-row,
+.dashboard .module table,
+.dashboard .module {
+    background: var(--inv-card);
+    border: 1px solid var(--inv-border);
+    border-radius: 10px;
+}
+
+.module h2,
+.module caption,
+.inline-group h2 {
+    background: #0f172a;
+    color: var(--inv-accent);
+    border-bottom: 1px solid var(--inv-border);
+}
+
+table thead th {
+    background: #0f172a;
+    color: var(--inv-accent);
+    border-bottom: 1px solid var(--inv-border);
+}
+
+tr:nth-child(even) {
+    background: rgba(255, 255, 255, 0.015);
+}
+
+input,
+textarea,
+select,
+.vTextField {
+    background: #0f172a;
+    border: 1px solid var(--inv-border);
+    color: var(--inv-text);
+    border-radius: 6px;
+}
+
+input:focus,
+textarea:focus,
+select:focus,
+.vTextField:focus {
+    border-color: var(--inv-accent);
+    box-shadow: 0 0 0 2px rgba(56, 189, 248, 0.2);
+}
+
+.button,
+input[type=submit],
+input[type=button],
+.submit-row input,
+a.button {
+    background: #1d4ed8;
+    border: 0;
+    border-radius: 7px;
+    color: #ffffff;
+    font-weight: 600;
+}
+
+.button.default,
+input[type=submit].default,
+.submit-row input.default {
+    background: var(--inv-accent);
+    color: #001018;
+}
+
+.errornote,
+ul.errorlist li {
+    background: rgba(185, 28, 28, 0.2);
+    border: 1px solid rgba(248, 113, 113, 0.4);
+    color: #fecaca;
+    border-radius: 8px;
+}
+
+.ciu-shell {
+    display: grid;
+    gap: 16px;
+}
+
+.ciu-dashboard-layout {
+    display: grid;
+    grid-template-columns: 72px 1fr;
+    gap: 14px;
+    align-items: start;
+}
+
+.ciu-icon-sidebar {
+    position: sticky;
+    top: 10px;
+    background: var(--inv-card);
+    border: 1px solid var(--inv-border);
+    border-radius: 10px;
+    padding: 10px 8px;
+    display: grid;
+    gap: 10px;
+}
+
+.ciu-icon-link {
+    width: 100%;
+    min-height: 44px;
+    border-radius: 8px;
+    border: 1px solid var(--inv-border);
+    background: #0b1324;
+    color: var(--inv-text);
+    text-decoration: none;
+    display: grid;
+    place-items: center;
+    font-size: 18px;
+}
+
+.ciu-icon-link:hover {
+    border-color: var(--inv-accent);
+    color: var(--inv-accent);
+}
+
+.ciu-hero,
+.ciu-kpi,
+.ciu-card,
+.ciu-login-card {
+    background: var(--inv-card);
+    border: 1px solid var(--inv-border);
+    border-radius: 10px;
+}
+
+.ciu-hero {
+    padding: 16px;
+}
+
+.ciu-hero h1,
+.ciu-card h2 {
+    margin: 0;
+    color: var(--inv-accent);
+}
+
+.ciu-eyebrow {
+    margin: 0 0 6px;
+    color: var(--inv-muted);
+    font-size: 11px;
+    text-transform: uppercase;
+}
+
+.ciu-muted {
+    color: var(--inv-muted);
+}
+
+.ciu-hero-actions {
+    margin-top: 12px;
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.ciu-btn {
+    background: #1d4ed8;
+    color: #fff;
+    border-radius: 7px;
+    padding: 8px 10px;
+    text-decoration: none;
+    font-size: 12px;
+}
+
+.ciu-btn-ghost {
+    background: transparent;
+    border: 1px solid var(--inv-border);
+}
+
+.ciu-kpis {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+    gap: 10px;
+}
+
+.ciu-kpi {
+    padding: 12px;
+}
+
+.ciu-kpi h3 {
+    margin: 0 0 6px;
+    color: var(--inv-muted);
+    font-size: 12px;
+}
+
+.ciu-kpi p {
+    margin: 0;
+    color: var(--inv-accent);
+    font-size: 22px;
+    font-weight: 700;
+}
+
+.ciu-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 12px;
+}
+
+.ciu-card {
+    padding: 12px;
+}
+
+.ciu-card-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.ciu-pill {
+    background: #0f172a;
+    border: 1px solid var(--inv-border);
+    color: var(--inv-muted);
+    border-radius: 999px;
+    font-size: 11px;
+    padding: 3px 8px;
+}
+
+.ciu-app-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 10px;
+}
+
+.ciu-app {
+    background: #0b1324;
+    border: 1px solid var(--inv-border);
+    border-radius: 10px;
+    padding: 10px;
+}
+
+.ciu-app-top {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    margin-bottom: 8px;
+}
+
+.ciu-app-top h3 {
+    margin: 0;
+    font-size: 14px;
+    color: var(--inv-accent);
+}
+
+.ciu-app-top span,
+.ciu-log-meta {
+    color: var(--inv-muted);
+    font-size: 12px;
+}
+
+.ciu-app ul,
+.ciu-log-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.ciu-app li {
+    display: flex;
+    justify-content: space-between;
+    gap: 8px;
+    padding: 6px 0;
+    border-bottom: 1px solid rgba(30, 41, 59, 0.8);
+}
+
+.ciu-app li:last-child {
+    border-bottom: 0;
+}
+
+.ciu-mini-action {
+    font-size: 11px;
+    color: #86efac;
+    text-decoration: none;
+}
+
+.ciu-log-list li {
+    padding: 8px;
+    border: 1px solid var(--inv-border);
+    border-radius: 8px;
+    background: #0b1324;
+    margin-bottom: 8px;
+}
+
+.ciu-log-object {
+    color: var(--inv-text);
+}
+
+.ciu-login-page #header,
+.ciu-login-page .breadcrumbs {
+    display: none;
+}
+
+.ciu-login-wrap {
+    min-height: 100vh;
+    display: grid;
+    place-items: center;
+    padding: 20px;
+}
+
+.ciu-login-card {
+    width: min(430px, 100%);
+    padding: 20px;
+}
+
+.ciu-login-card h1 {
+    margin: 0 0 8px;
+    color: var(--inv-accent);
+}
+
+.ciu-field {
+    margin-top: 10px;
+}
+
+.ciu-field label {
+    color: var(--inv-muted);
+    font-size: 12px;
+}
+
+.ciu-submit {
+    margin-top: 14px;
+    width: 100%;
+    background: #1d4ed8;
+    color: #fff;
+    border: 0;
+    border-radius: 7px;
+    padding: 10px;
+    font-weight: 600;
+}
+
+@media (max-width: 1024px) {
+    .ciu-dashboard-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .ciu-icon-sidebar {
+        position: static;
+        grid-template-columns: repeat(auto-fit, minmax(44px, 1fr));
+    }
+
+    .ciu-grid {
+        grid-template-columns: 1fr;
+    }
+}

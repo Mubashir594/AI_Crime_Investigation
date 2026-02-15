@@ -1,0 +1,26 @@
+body {
+    background-color: #0b1220;
+    color: #ffffff;
+    font-family: Arial, sans-serif;
+}
+
+h1, h2, h3 {
+    color: #38bdf8;
+}
+
+.analytics-card {
+    background-color: #020617;
+    border: 1px solid #1e293b;
+    color: #ffffff;
+}
+
+.logs-card {
+    background-color: #020617;
+    border: 1px solid #1e293b;
+    color: #ffffff;
+}
+
+.table-dark {
+    --bs-table-bg: #020617;
+    --bs-table-border-color: #1e293b;
+}
