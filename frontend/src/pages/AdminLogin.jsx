@@ -1,8 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { getApiBaseCandidates } from "../utils/apiBase";
 import "../styles/admin-module.css";
-
-const API_BASE_CANDIDATES = ["http://127.0.0.1:8000", "http://localhost:8000"];
 
 export default function AdminLogin() {
   const navigate = useNavigate();
@@ -11,7 +10,7 @@ export default function AdminLogin() {
   const [error, setError] = useState("");
 
   const adminLogin = async (payload) => {
-    for (const base of API_BASE_CANDIDATES) {
+    for (const base of getApiBaseCandidates()) {
       try {
         const response = await fetch(`${base}/api/admin/auth/login/`, {
           method: "POST",
@@ -21,7 +20,10 @@ export default function AdminLogin() {
         });
 
         const data = await response.json();
-        if (data.success) return { ok: true, data };
+        if (data.success) {
+          window.localStorage.setItem("api_base", base);
+          return { ok: true, data };
+        }
         return { ok: false, data };
       } catch {
         // try next base

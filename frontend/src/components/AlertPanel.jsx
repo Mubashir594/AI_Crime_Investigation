@@ -1,9 +1,10 @@
 import { useEffect, useRef, useState } from "react";
+import { getApiBase } from "../utils/apiBase";
 
 const ALERT_VISIBLE_MS = 5000;
 const ALERT_SOUND_COOLDOWN_MS = 30000;
 const ALERT_REPEAT_COOLDOWN_MS = 30000;
-const API_BASE = window.localStorage.getItem("api_base") || `http://${window.location.hostname || "localhost"}:8000`;
+const API_BASE = getApiBase();
 
 export default function AlertPanel() {
   const [alert, setAlert] = useState(null);

@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
-
-const API_BASE_CANDIDATES = ["http://127.0.0.1:8000", "http://localhost:8000"];
+import { getApiBaseCandidates } from "../utils/apiBase";
 
 export default function CriminalDatabasePanel() {
   const [criminals, setCriminals] = useState([]);
@@ -23,7 +22,7 @@ export default function CriminalDatabasePanel() {
         let payload = null;
         let lastError = "";
 
-        for (const base of API_BASE_CANDIDATES) {
+        for (const base of getApiBaseCandidates()) {
           try {
             const res = await fetch(`${base}/api/criminals/`, {
               credentials: "include",

@@ -1,10 +1,9 @@
 import { useEffect, useMemo, useState } from "react";
 import DashboardLayout from "../layouts/DashboardLayout";
 import Sidebar from "../components/Sidebar";
+import { getApiBase } from "../utils/apiBase";
 
-const API_BASE =
-  window.localStorage.getItem("api_base") ||
-  `http://${window.location.hostname || "localhost"}:8000`;
+const API_BASE = getApiBase();
 
 const DOWNLOAD_OPTIONS = [
   { value: "pdf", label: "PDF" },

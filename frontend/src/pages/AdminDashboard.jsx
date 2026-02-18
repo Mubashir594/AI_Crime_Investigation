@@ -9,15 +9,8 @@ import {
   FaEdit,
   FaSignOutAlt,
 } from "react-icons/fa";
+import { getApiBaseCandidates } from "../utils/apiBase";
 import "../styles/admin-module.css";
-
-const getApiBaseCandidates = () => {
-  const host = window.location.hostname || "localhost";
-  const preferred = `http://${host}:8000`;
-  const fallback = ["http://localhost:8000", "http://127.0.0.1:8000"];
-  const saved = window.localStorage.getItem("api_base");
-  return [saved, preferred, ...fallback].filter((value, index, arr) => value && arr.indexOf(value) === index);
-};
 
 async function resolveApiBase() {
   for (const base of getApiBaseCandidates()) {

@@ -6,8 +6,9 @@ import LiveScanPanel from "../components/LiveScanPanel";
 import AlertPanel from "../components/AlertPanel";
 import AiAccuracyRing from "../components/AiAccuracyRing";
 import LiveScanMatchesPanel from "../components/LiveScanMatchesPanel";
+import { getApiBase } from "../utils/apiBase";
 
-const API_BASE = window.localStorage.getItem("api_base") || `http://${window.location.hostname || "localhost"}:8000`;
+const API_BASE = getApiBase();
 
 export default function WebcamScan() {
   const navigate = useNavigate();
@@ -110,7 +111,7 @@ export default function WebcamScan() {
   }, []);
 
   return (
-    <DashboardLayout>
+    <DashboardLayout className="hud-root-no-bg-radar">
       <div className="hud-menu">
         <Sidebar />
       </div>

@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { FaUserCircle } from "react-icons/fa";
+import { getApiBase } from "../utils/apiBase";
 import "../styles/hud.css";
 
 export default function DashboardLayout({ children, className = "" }) {
@@ -8,7 +9,7 @@ export default function DashboardLayout({ children, className = "" }) {
   const [profile, setProfile] = useState(null);
   const [profileError, setProfileError] = useState("");
   const profileRef = useRef(null);
-  const apiBase = window.localStorage.getItem("api_base") || `http://${window.location.hostname || "localhost"}:8000`;
+  const apiBase = getApiBase();
 
   useEffect(() => {
     const timer = setInterval(() => setNow(new Date()), 1000);

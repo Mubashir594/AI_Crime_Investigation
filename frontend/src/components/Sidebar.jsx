@@ -9,8 +9,9 @@ import {
 } from "react-icons/fa";
 import { useEffect, useRef, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
+import { getApiBase } from "../utils/apiBase";
 
-const API_BASE = window.localStorage.getItem("api_base") || `http://${window.location.hostname || "localhost"}:8000`;
+const API_BASE = getApiBase();
 
 export default function Sidebar() {
   const navigate = useNavigate();

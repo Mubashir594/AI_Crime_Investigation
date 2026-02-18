@@ -4,3 +4,6 @@ __pycache__/
 *.pyc
 frontend/node_modules/
 frontend/dist/
+ # local database + media
+crime_project/db.sqlite3
+crime_project/media/

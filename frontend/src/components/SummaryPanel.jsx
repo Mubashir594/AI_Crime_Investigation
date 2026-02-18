@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
+import { getApiBase } from "../utils/apiBase";
 
-const API_BASE = window.localStorage.getItem("api_base") || `http://${window.location.hostname || "localhost"}:8000`;
+const API_BASE = getApiBase();
 
 export default function SummaryPanel({
   cameraStatus = "ONLINE",
